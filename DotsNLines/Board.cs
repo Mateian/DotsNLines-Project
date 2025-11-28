@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DotsNLines
 {
-    public class Board
+    public partial class Board
     {
         public List<Line> Lines;
         public List<Box> boxes;

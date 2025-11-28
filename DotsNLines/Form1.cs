@@ -146,7 +146,7 @@ namespace DotsNLines
                 Line line = _board.Lines[i];
                 Point P1 = GetPointCoordinates(line.X1, line.Y1);
                 Point P2 = GetPointCoordinates(line.X2, line.Y2);
-                if(P.X >= P1.X - 20 && P.X <= P2.X + 20 && P.Y >= P1.Y - 20 && P.Y <= P2.Y + 20)
+                if(P.X >= P1.X - 20 && P.X <= P2.X + 20 && P.Y >= P1.Y - 20 && P.Y <= P2.Y + 20 && _board.Lines[i].OwnedBy==PlayerType.None)
                 {
                     _board.Lines[i].OwnedBy = PlayerType.Human;
                     for(int k = 0; k < _board.boxes.Count; ++k)
@@ -164,13 +164,27 @@ namespace DotsNLines
                     {
                         if (_board.boxes[k].Lines.Where(l => l.OwnedBy != PlayerType.None).Count() == 4)
                         {
-                            _board.boxes[k].OwnedBy = PlayerType.Human;
+                            if (_board.boxes[k].OwnedBy == PlayerType.None)
+                            {
+                                _board.boxes[k].OwnedBy = PlayerType.Human;
+                                _playerType = PlayerType.Human;
+                            }
                         }
+                        else
+                            _playerType = PlayerType.Computer;
                     }
-                    //
+
+                    CheckFinish();
+
+                    if (_playerType == PlayerType.Computer)
+                    {
+                        _board.computerScore = 0;
+                        Compute_AI_move();
+                    }
                 }
             }
             _board.humanScore = 0;
+
             foreach(Box box in _board.boxes)
             {
                 if(box.OwnedBy == PlayerType.Human)
@@ -179,8 +193,24 @@ namespace DotsNLines
                 }
             }
             Refresh();
+        }
 
+        private void Compute_AI_move()
+        {
+            // aici cam trebe bagat un delay ca nu se vede cand se schimba interfata pentru ai cand muta
+            Board newBoard = Minimax_alpha_beta.FindNextBoard(_board);
+            _board = newBoard;
+            foreach (Box box in _board.boxes)
+            {
+                if (box.OwnedBy == PlayerType.Computer)
+                {
+                    _board.computerScore++;
+                }
+            }
+            _playerType = PlayerType.Computer;
             CheckFinish();
+
+            Refresh();
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,6 +231,7 @@ namespace DotsNLines
                 {
                     if(MessageBox.Show("Ai castigat.", "Game Info", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
                     {
+                        _playerType = PlayerType.None;
                         Application.Exit();
                     }
                 }
@@ -208,6 +239,7 @@ namespace DotsNLines
                 {
                     if (MessageBox.Show("Ai pierdut.", "Game Info", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
                     {
+                        _playerType = PlayerType.None;
                         Application.Exit();
                     }
                 }
