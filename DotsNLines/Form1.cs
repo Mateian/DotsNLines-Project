@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,6 +39,7 @@ namespace DotsNLines
 
             _playerType = PlayerType.Human;
             _board = new Board(rows, columns);
+            difficultyComboBox.SelectedIndex = 0;
         }
 
         private void pictureBoxGame_Paint(object sender, PaintEventArgs e)
@@ -160,6 +162,7 @@ namespace DotsNLines
                         }
                     }
 
+                    bool stillPlaying = false;
                     for(int k = 0; k < _board.boxes.Count; ++k)
                     {
                         if (_board.boxes[k].Lines.Where(l => l.OwnedBy != PlayerType.None).Count() == 4)
@@ -168,15 +171,24 @@ namespace DotsNLines
                             {
                                 _board.boxes[k].OwnedBy = PlayerType.Human;
                                 _playerType = PlayerType.Human;
+                                stillPlaying = true;
                             }
                         }
                         else
                             _playerType = PlayerType.Computer;
                     }
 
+
+                    if(stillPlaying)
+                    {
+                        _playerType = PlayerType.Human;
+                    }
+                    
+                    Refresh();
+
                     CheckFinish();
 
-                    if (_playerType == PlayerType.Computer)
+                    while (_playerType == PlayerType.Computer)
                     {
                         _board.computerScore = 0;
                         Compute_AI_move();
@@ -199,6 +211,14 @@ namespace DotsNLines
         {
             // aici cam trebe bagat un delay ca nu se vede cand se schimba interfata pentru ai cand muta
             Board newBoard = Minimax_alpha_beta.FindNextBoard(_board);
+            if (_board.computerScore < newBoard.computerScore)
+            {
+                _playerType = PlayerType.Computer;
+            }
+            else
+            {
+                _playerType = PlayerType.Human;
+            }
             _board = newBoard;
             foreach (Box box in _board.boxes)
             {
@@ -207,7 +227,7 @@ namespace DotsNLines
                     _board.computerScore++;
                 }
             }
-            _playerType = PlayerType.Computer;
+
             CheckFinish();
 
             Refresh();
@@ -254,6 +274,19 @@ namespace DotsNLines
         private void pictureBoxBackground_Click(object sender, EventArgs e)
         {
             pictureBoxGame.Visible = true;
+            switch(difficultyComboBox.SelectedIndex)
+            {
+                case 1:
+                    _board.difficulty = 3;
+                    break;
+                case 2:
+                    _board.difficulty = 4;
+                    break;
+                default:
+                    _board.difficulty = 2;
+                    break;
+            }
+            difficultyComboBox.Visible = false;
         }
     }
 }

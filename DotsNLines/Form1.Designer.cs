@@ -36,6 +36,7 @@
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBoxGame = new System.Windows.Forms.PictureBox();
+            this.difficultyComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGame)).BeginInit();
@@ -92,10 +93,21 @@
             this.pictureBoxGame.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGame_Paint);
             this.pictureBoxGame.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGame_MouseUp);
             // 
+            // difficultyComboBox
+            // 
+            this.difficultyComboBox.FormattingEnabled = true;
+            this.difficultyComboBox.Items.AddRange(new object[] {
+            resources.GetString("difficultyComboBox.Items"),
+            resources.GetString("difficultyComboBox.Items1"),
+            resources.GetString("difficultyComboBox.Items2")});
+            resources.ApplyResources(this.difficultyComboBox, "difficultyComboBox");
+            this.difficultyComboBox.Name = "difficultyComboBox";
+            // 
             // FormDotsNLines
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.difficultyComboBox);
             this.Controls.Add(this.pictureBoxGame);
             this.Controls.Add(this.pictureBoxBackground);
             this.Controls.Add(this.menuStrip1);
@@ -121,6 +133,7 @@
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBoxGame;
+        private System.Windows.Forms.ComboBox difficultyComboBox;
     }
 }
 

@@ -15,6 +15,7 @@ namespace DotsNLines
         public int humanScore;
         public int computerScore;
         public int rowsDots, columnsDots;
+        public int difficulty;
 
         public Board(int rowsDots, int columnsDots)
         {

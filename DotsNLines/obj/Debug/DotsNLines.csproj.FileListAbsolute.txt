@@ -19,3 +19,13 @@ C:\Users\Boghiuuu\Documents\Visual Studio 2022\IA_Proiect\DotsNLines-Project\Dot
 C:\Users\Boghiuuu\Documents\Visual Studio 2022\IA_Proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.csproj.CoreCompileInputs.cache
 C:\Users\Boghiuuu\Documents\Visual Studio 2022\IA_Proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.exe
 C:\Users\Boghiuuu\Documents\Visual Studio 2022\IA_Proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.pdb
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.csproj.AssemblyReference.cache
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.FormDotsNLines.resources
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.Properties.Resources.resources
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.csproj.GenerateResource.cache
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.csproj.CoreCompileInputs.cache
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.exe
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\obj\Debug\DotsNLines.pdb
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\bin\Debug\DotsNLines.exe.config
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\bin\Debug\DotsNLines.exe
+D:\Facultate\an4\IA\proiect\DotsNLines-Project\DotsNLines\bin\Debug\DotsNLines.pdb

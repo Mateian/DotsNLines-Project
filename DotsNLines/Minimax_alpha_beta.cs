@@ -71,7 +71,7 @@ namespace DotsNLines
     }
     public partial class Minimax_alpha_beta
     {
-        private const int MaxDepth = 3;//factoru vietii
+        private int MaxDepth = 2;//factoru vietii
 
         public static Board FindNextBoard(Board currentBoard)
         {
@@ -88,11 +88,11 @@ namespace DotsNLines
                 double moveValue;
                 if (scored)
                 {
-                    moveValue = Minimax(newBoard, MaxDepth - 1, double.NegativeInfinity, double.PositiveInfinity, true);
+                    moveValue = Minimax(newBoard, currentBoard.difficulty, double.NegativeInfinity, double.PositiveInfinity, true);
                 }
                 else
                 {
-                    moveValue = Minimax(newBoard, MaxDepth - 1, double.NegativeInfinity, double.PositiveInfinity, false);
+                    moveValue = Minimax(newBoard, currentBoard.difficulty, double.NegativeInfinity, double.PositiveInfinity, false);
                 }
 
                 if (moveValue > bestValue)
