@@ -21,13 +21,13 @@ namespace DotsNLines
     public partial class FormDotsNLines : Form
     {
         // Spacing
-        private int rows = 4;
-        private int columns = 4;
-        private int dotSize = 20;
-        private int paddingX = 45;
-        private int paddingY = 65;
-        private int spacingX = 120;
-        private int spacingY = 120;
+        private int _rows = 4;
+        private int _columns = 4;
+        private int _dotSize = 20;
+        private int _paddingX = 45;
+        private int _paddingY = 65;
+        private int _spacingX = 120;
+        private int _spacingY = 120;
 
         // Game settings
         private Board _board;
@@ -38,7 +38,7 @@ namespace DotsNLines
             InitializeComponent();
 
             _playerType = PlayerType.Human;
-            _board = new Board(rows, columns);
+            _board = new Board(_rows, _columns);
             difficultyComboBox.SelectedIndex = 0;
         }
 
@@ -64,19 +64,19 @@ namespace DotsNLines
                 if (box.OwnedBy == PlayerType.Human)
                 {
                     Rectangle rect = GetBoxRect(box.X1, box.Y1);
-                    g.FillRectangle(blueBrush, rect.X, rect.Y, spacingX, spacingY);
+                    g.FillRectangle(blueBrush, rect.X, rect.Y, _spacingX, _spacingY);
                 }
 
                 if (box.OwnedBy == PlayerType.Computer)
                 {
                     Rectangle rect = GetBoxRect(box.X1, box.Y1);
-                    g.FillRectangle(redBrush, rect.X, rect.Y, spacingX, spacingY);
+                    g.FillRectangle(redBrush, rect.X, rect.Y, _spacingX, _spacingY);
                 }
 
                 if (box.OwnedBy == PlayerType.None)
                 {
                     Rectangle rect = GetBoxRect(box.X1, box.Y1);
-                    g.FillRectangle(whiteBrush, rect.X, rect.Y, spacingX, spacingY);
+                    g.FillRectangle(whiteBrush, rect.X, rect.Y, _spacingX, _spacingY);
                 }
             }
 
@@ -90,12 +90,12 @@ namespace DotsNLines
             }
 
             brush = blackBrush;
-            for (int i = 0; i < rows; ++i)
+            for (int i = 0; i < _rows; ++i)
             {
-                for (int j = 0; j < columns; ++j)
+                for (int j = 0; j < _columns; ++j)
                 {
                     Point p = GetPointCoordinates(i, j);
-                    g.FillEllipse(brush, p.X - dotSize / 2, p.Y - dotSize / 2, dotSize, dotSize);
+                    g.FillEllipse(brush, p.X - _dotSize / 2, p.Y - _dotSize / 2, _dotSize, _dotSize);
                 }
             }
 
@@ -125,8 +125,8 @@ namespace DotsNLines
 
         private Point GetPointCoordinates(int indexX, int indexY)
         {
-            int x = paddingX + indexX * spacingX;
-            int y = paddingY + indexY * spacingY;
+            int x = _paddingX + indexX * _spacingX;
+            int y = _paddingY + indexY * _spacingY;
 
             return new Point(x, y);
         }
@@ -235,7 +235,10 @@ namespace DotsNLines
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pictureBoxGame.Visible = true;
+            pictureBoxGame.Visible = false;
+            difficultyComboBox.Visible = true;
+            _board = new Board(_rows, _columns);
+            Application.Restart();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,6 +288,28 @@ namespace DotsNLines
                 default:
                     _board.difficulty = 2;
                     break;
+            }
+
+            if(_board.difficulty == 3)
+            {
+                _rows = 5;
+                _columns = 5;
+                _board = new Board(_rows, _columns);
+                _dotSize = 20;
+                _paddingX = 20;
+                _paddingY = 45;
+                _spacingX = 100;
+                _spacingY = 100;
+    } else if(_board.difficulty == 4)
+            {
+                _rows = 6;
+                _columns = 6;
+                _board = new Board(_rows, _columns);
+                _dotSize = 20;
+                _paddingX = 20;
+                _paddingY = 45;
+                _spacingX = 80;
+                _spacingY = 80;
             }
             difficultyComboBox.Visible = false;
         }
